@@ -1,0 +1,154 @@
+substitutions:
+  plug_name: guestroom_esp32
+esphome:
+  name: ${plug_name}
+  platform: ESP32
+  board: esp32dev
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  fast_connect: true
+  ap:
+    ssid: ${plug_name}_Fallback_Hotspot
+    password: !secret ap_pass
+    
+  # manual_ip:
+  #   static_ip: 192.168.1.17
+  #   gateway: 192.168.1.1
+  #   subnet: 255.255.255.0
+captive_portal:  
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret ha_api_pass
+ota: 
+  password: !secret ha_api_pass
+
+web_server:
+
+binary_sensor:
+  - platform: gpio
+    name: ${plug_name}_sw4
+    pin:
+      number: GPIO13
+      mode: INPUT_PULLUP
+    id: switch_4
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay1
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay1
+  - platform: gpio
+    name: ${plug_name}_sw3
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+    id: switch_3
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay2
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay2    
+  - platform: gpio
+    name: ${plug_name}_sw2
+    pin:
+      number: GPIO27
+      mode: INPUT_PULLUP
+    id: switch_2
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay3
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay3  
+  - platform: gpio
+    name: ${plug_name}_sw1
+    pin:
+      number: GPIO26
+      mode: INPUT_PULLUP
+    id: switch_1
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay3
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay3  
+switch:
+  - platform: gpio
+    name: ${plug_name}_switch_relay1_light1
+    icon: mdi:ceiling-light
+    pin: GPIO23
+    inverted: yes
+    id: relay1
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: ${plug_name}_switch_relay2_light2
+    icon: mdi:lightbulb-group-outline
+    pin: GPIO22 #d22
+    inverted: yes
+    id: relay2
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    icon: mdi:ceiling-light
+    name: ${plug_name}_switch_relay3_light3
+    pin: GPIO21
+    inverted: yes
+    id: relay3
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: ${plug_name}_socket1
+    pin: GPIO19
+    id: socket1
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: mdi:power-socket-de
+  - platform: gpio
+    name: ${plug_name}_socket2
+    pin: GPIO18
+    id: socket2
+    icon: mdi:power-socket-de
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: ${plug_name}_socket3
+    pin: GPIO5
+    id: socket3
+    icon: mdi:power-socket-de
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: ${plug_name}_socket4
+    pin: GPIO4
+    id: socket4
+    icon: mdi:power-socket-de
+    restore_mode: RESTORE_DEFAULT_OFF
+  - platform: gpio
+    name: ${plug_name}_socket5
+    pin: GPIO2
+    id: socket5
+    icon: mdi:power-socket-de
+    restore_mode: RESTORE_DEFAULT_OFF
+sensor:
+   - platform: uptime
+     name: ${plug_name}_uptime
+     id: device_uptime
+   - platform: wifi_signal
+     name: ${plug_name}_wifi_signal
+     update_interval: 60s
+   - platform: dht
+     model: DHT11
+     pin: GPIO33 #D33 
+     humidity:
+      name: ${plug_name}_humidity
+     temperature:
+      name: ${plug_name}_temp
+     update_interval: 30s  
