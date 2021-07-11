@@ -1,0 +1,168 @@
+#При первой прошивка через uart прошивать без платы.
+
+substitutions:
+  plug_name: bedroom
+esphome:
+  name: ${plug_name}
+  platform: ESP8266
+  board: nodemcuv2
+  esp8266_restore_from_flash: true
+  on_boot:
+   then:
+     - switch.turn_off: relay1
+     - switch.turn_on: socket1
+     - switch.turn_on: socket2
+     - switch.turn_on: socket3
+     
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  fast_connect: true
+
+  ap:
+    ssid: ${plug_name}_Fallback_Hotspot
+    password: !secret ap_pass
+
+  # Optional manual IP
+  # manual_ip:
+  #   static_ip: 192.168.1.10
+  #   gateway: 192.168.1.1
+  #   subnet: 255.255.255.0
+captive_portal:
+logger:
+
+# Enable Home Assistant API
+api:
+  password: !secret ha_api_pass
+
+ota: 
+  password: !secret ha_api_pass
+
+web_server:
+
+binary_sensor:
+  - platform: gpio
+    name: ${plug_name}_sw1
+    pin: 
+      number: GPIO14
+      mode: INPUT_PULLUP
+      inverted: true
+    id: switch_light1
+    filters:
+      - delayed_on: 50ms
+      - delayed_off: 50ms
+      - delayed_on_off: 100ms
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay1
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay1
+  - platform: gpio
+    name: ${plug_name}_sw2
+    pin: 
+      number: GPIO12
+      mode: INPUT_PULLUP
+      inverted: true
+    id: switch_light2
+    filters:
+      - delayed_on: 50ms
+      - delayed_off: 50ms
+      - delayed_on_off: 100ms
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay2
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay2
+  - platform: gpio
+    name: ${plug_name}_sw3
+    pin: 
+      number: GPIO13
+      mode: INPUT_PULLUP
+      inverted: true
+    id: switch_light3
+    filters:
+      - delayed_on: 50ms
+      - delayed_off: 50ms
+      - delayed_on_off: 100ms
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay3
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay3
+  - platform: gpio
+    name: ${plug_name}_sw4 
+    pin: 
+      number: GPIO5
+      mode: INPUT_PULLUP
+      inverted: true
+    id: switch_light4 
+    filters:
+      - delayed_on: 50ms
+      - delayed_off: 50ms
+      - delayed_on_off: 100ms
+    on_press:
+      then:
+        - switch.toggle:
+            id: relay4
+    on_release:
+      then:
+        - switch.toggle:
+            id: relay4
+            
+#-----------------------------------  
+switch:
+  - platform: gpio
+    name: ${plug_name}_switch_relay_light
+    icon: mdi:ceiling-light
+    pin: GPIO2 #d
+    inverted: true
+    # restore_mode: ALWAYS_OFF
+    id: relay1
+  - platform: gpio
+    name: ${plug_name}_socket1
+    icon: mdi:power-socket-de
+    pin: GPIO1 #tx
+    # inverted: true
+    id: socket1
+    restore_mode: ALWAYS_OFF
+  - platform: gpio
+    name: ${plug_name}_socket2
+    icon: mdi:power-socket-de
+    pin:  GPIO4 #d1
+    # inverted: true
+    id: socket2
+  - platform: gpio
+    name: ${plug_name}_socket3
+    icon: mdi:power-socket-de
+    pin:   GPIO3 #rx
+    # inverted: true
+    id: socket3
+
+sensor:
+   - platform: uptime
+     name: ${plug_name}_uptime
+   - platform: wifi_signal
+     name: ${plug_name}_wifi_signal
+     update_interval: 60s
+   - platform: dht
+     model: DHT11
+     pin: GPIO16 #D0
+     humidity:
+      name: ${plug_name}_humidity
+     temperature:
+      name: ${plug_name}_temp
+     update_interval: 30s  
+
+text_sensor:
+  - platform: version
+    name: ${plug_name}_firmware_version
