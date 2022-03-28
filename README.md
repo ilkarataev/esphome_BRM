@@ -24,7 +24,7 @@ Gerber,BOM файл 8_relays_modules/gerber_file/
 <img src="https://raw.githubusercontent.com/ilkarataev/esphome_BRM/main/8_relays_modules/images/All_up.jpg" alt="front side" width="50%" height="50%"><img src="https://raw.githubusercontent.com/ilkarataev/esphome_BRM/main/8_relays_modules/images/My_board_alone_down.jpg" alt="back side" width="50%" height="50%">
 
 Остальные фото в папке 8_relays_modules/images
-### 4 релейный модуль  
+### 4 релейный модуль  ВРЕМЕННО НЕ АКТУАЛЬНАЯ ИНФОРМАЦИЯ ТРЕБУЕТ ДОРАБОТКИ
 Gerber,BOM файл 4_relays_modules/gerber_file/  
 Корпус для печати на 3д принтере 4_relays_modules/box/
 Компоненты для распайки:  
