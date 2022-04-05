@@ -7,7 +7,7 @@ Gerber,BOM файл 8_relays_modules/gerber_file/
 Ссылки и стоимость в Челябинске с Али конечно будет дешевле.  
 1.Hilink 220v->5. - 1штука [300р](https://procontact74.ru/22-zaryadnye-ustrojstva-bloki-pitaniya/221-impulsnye-bpi/ac-dc-preobrazovatel-220v---5v-06a-hi-link-hlk-pm01).  
 2.Esp32 30 pins, на моей написанно devkitv1 - 1 штука [500р](https://procontact74.ru/14-arduino-elektronnye-moduli/222/bluetooth---wi-fi-modul-esp-32-devkit-v1-new).    
-3.Стойка PCHSS-6 - 2штуки 5р\*2=[10р](https://procontact74.ru/ustanovochnye-izdeliya/stoyki-dlya-pp/stojka-pchss-6-05906)  
+3.Стойка PCHSS-6 - 2штуки 5р\*2=[10р](https://procontact74.ru/ustanovochnye-izdeliya/stoyki-dlya-pp/stojka-pchss-6-05906) [14рЧипидип](https://www.chipdip.ru/catalog-show/pcb-metal-supports?gq=PCHSS-6)  
 4.Стойка PCHSN-20 - 2штуки 12\*2=[24р](https://procontact74.ru/ustanovochnye-izdeliya/stoyki-dlya-pp/stoyka-pchsn-20)  
 5.Клеммник KF301-2P или XY301V-A-2P синний - 1штука. [10р](https://procontact74.ru/27-kommutaciya/05-nakonechniki-klemmy/053-klemmniki-nazhimnye-razryvnye/xy301v-2p-5mm-05307)  
 6.Клеммник XY301V-A-3P 5.08мм синий - 6 штук.6*12р=[72р](https://procontact74.ru/27-kommutaciya/05-nakonechniki-klemmy/053-klemmniki-nazhimnye-razryvnye/xy301v-3p-5mm-05308)  
